@@ -40,4 +40,4 @@ export const myClaims = () => api('/claims/me')
 export const claimsByReport = (reportId) => api(`/claims/report/${reportId}`)
 export const resolveClaim = (id, status) =>
   api(`/claims/${id}/resolve`, { method: 'PATCH', body: { status } })
-export const claimMetrics = () => api('/metrics/claims')
+export const claimMetrics = () => api('/claims/metrics')
