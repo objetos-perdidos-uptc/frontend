@@ -31,6 +31,46 @@ export async function api(path, { method = 'GET', body } = {}) {
 export const login = (email, password) =>
   api('/auth/login', { method: 'POST', body: { email, password } })
 
+// --- Reportes (report-service, Persona 2) ---
+const qs = (params) => {
+  const s = new URLSearchParams(
+    Object.entries(params).filter(([, v]) => v !== '' && v != null)
+  ).toString()
+  return s ? `?${s}` : ''
+}
+
+export const reportCategories = () => api('/reports/categories')
+export const reportFeed = (params = {}) => api(`/reports/feed${qs(params)}`)
+export const myReports = (status) => api(`/reports/me${qs({ status })}`)
+export const getReport = (id) => api(`/reports/${id}`)
+export const createReport = (payload) => api('/reports', { method: 'POST', body: payload })
+export const updateReport = (id, payload) => api(`/reports/${id}`, { method: 'PUT', body: payload })
+export const closeReport = (id, reason) =>
+  api(`/reports/${id}/close`, { method: 'PATCH', body: { reason } })
+export const renewReport = (id) => api(`/reports/${id}/renew`, { method: 'PATCH' })
+
+// Las fotos van como multipart, por eso no usan api() (que siempre envía JSON).
+export async function uploadReportPhotos(id, files) {
+  const form = new FormData()
+  for (const f of files) form.append('photos', f)
+  const res = await fetch(`/api/reports/${id}/photos`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${auth.token}` },
+    body: form,
+  })
+  const data = await res.json().catch(() => null)
+  if (!res.ok) throw new Error(data?.detail || `Error ${res.status}`)
+  return data
+}
+
+// El Gateway exige el token también para las imágenes, así que un <img src> directo no sirve:
+// se descarga la foto con el token y se devuelve una URL local para mostrarla.
+export async function reportPhotoUrl(photoPath) {
+  const res = await fetch(`/api${photoPath}`, { headers: { Authorization: `Bearer ${auth.token}` } })
+  if (!res.ok) throw new Error(`Error ${res.status}`)
+  return URL.createObjectURL(await res.blob())
+}
+
 // --- Reclamos (claim-service) ---
 export const createClaim = (payload) => api('/claims', { method: 'POST', body: payload })
 export const verifyOtp = (id, code) =>

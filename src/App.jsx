@@ -1,6 +1,7 @@
 import { Navigate, NavLink, Route, Routes, useNavigate } from 'react-router-dom'
 import { auth } from './api.js'
 import Login from './pages/Login.jsx'
+import Feed from './pages/Feed.jsx'
 import Claims from './pages/Claims.jsx'
 import Metrics from './pages/Metrics.jsx'
 import Placeholder from './pages/Placeholder.jsx'
@@ -36,7 +37,7 @@ export default function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<Navigate to="/claims" replace />} />
       {/* Cada integrante reemplaza su Placeholder por su pantalla */}
-      <Route path="/feed" element={<Protected><Shell><Placeholder title="Feed de reportes" owner="Persona 2" /></Shell></Protected>} />
+      <Route path="/feed" element={<Protected><Shell><Feed /></Shell></Protected>} />
       <Route path="/recommendations" element={<Protected><Shell><Placeholder title="Recomendaciones" owner="Persona 3" /></Shell></Protected>} />
       <Route path="/notifications" element={<Protected><Shell><Placeholder title="Notificaciones" owner="Persona 3" /></Shell></Protected>} />
       <Route path="/claims" element={<Protected><Shell><Claims /></Shell></Protected>} />

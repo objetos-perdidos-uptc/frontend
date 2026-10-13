@@ -8,7 +8,7 @@ body { margin: 0; font-family: system-ui, sans-serif; background: #f4f5f7; color
 .container.narrow { max-width: 380px; margin-top: 80px; }
 .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px; margin-bottom: 16px; display: flex; flex-direction: column; gap: 10px; }
 .card h2, h2 { margin: 0 0 4px; }
-input, textarea { padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font: inherit; width: 100%; }
+input, textarea, select { padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font: inherit; width: 100%; }
 button { padding: 10px 16px; border: 0; border-radius: 6px; background: #2563eb; color: #fff; font: inherit; cursor: pointer; }
 button.link { background: none; color: #2563eb; padding: 0; }
 .row { display: flex; gap: 12px; align-items: center; }
@@ -18,3 +18,8 @@ button.link { background: none; color: #2563eb; padding: 0; }
 .badge.APPROVED { background: #d1fae5; } .badge.REJECTED { background: #fee2e2; } .badge.FLAGGED { background: #fde68a; } .badge.PENDING { background: #dbeafe; }
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
 .stat strong { font-size: 28px; }
+.tabs { margin-bottom: 16px; } .tabs button { white-space: nowrap; }
+.row button { flex-shrink: 0; } button:disabled { opacity: .5; cursor: default; }
+label { display: flex; flex-direction: column; gap: 4px; font-size: 14px; color: #4b5563; }
+.thumbs { display: flex; gap: 8px; overflow-x: auto; } .thumbs img { height: 110px; border-radius: 6px; }
+.badge.LOST { background: #fee2e2; } .badge.FOUND, .badge.ACTIVE { background: #d1fae5; } .badge.EXPIRED { background: #fde68a; }
