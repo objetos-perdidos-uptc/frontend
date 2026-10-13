@@ -81,3 +81,19 @@ export const claimsByReport = (reportId) => api(`/claims/report/${reportId}`)
 export const resolveClaim = (id, status) =>
   api(`/claims/${id}/resolve`, { method: 'PATCH', body: { status } })
 export const claimMetrics = () => api('/claims/metrics')
+
+// --- Matching (matching-service, Persona 3) ---
+export const myRecommendations = (reportId, minScore = 0) =>
+  api(`/matches/lost/${reportId}/recommendations${qs({ minScore })}`)
+
+export const myFoundCandidates = (reportId, minScore = 0) =>
+  api(`/matches/found/${reportId}/candidates${qs({ minScore })}`)
+
+// --- Notificaciones (notification-service, Persona 3) ---
+export const myNotifications = (unreadOnly = false) =>
+  api(`/notifications/me${qs({ unread: unreadOnly })}`)
+
+export const markNotificationRead = (id) =>
+  api(`/notifications/${id}/read`, { method: 'PATCH' })
+
+export const adminAlerts = () => api('/notifications/admin/alerts')

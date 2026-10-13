@@ -5,6 +5,8 @@ import Feed from './pages/Feed.jsx'
 import Claims from './pages/Claims.jsx'
 import Metrics from './pages/Metrics.jsx'
 import Placeholder from './pages/Placeholder.jsx'
+import Recommendations from './pages/Recommendations.jsx'
+import Notifications from './pages/Notifications.jsx'
 
 function Protected({ children }) {
   return auth.token ? children : <Navigate to="/login" replace />
@@ -36,10 +38,9 @@ export default function App() {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<Navigate to="/claims" replace />} />
-      {/* Cada integrante reemplaza su Placeholder por su pantalla */}
       <Route path="/feed" element={<Protected><Shell><Feed /></Shell></Protected>} />
-      <Route path="/recommendations" element={<Protected><Shell><Placeholder title="Recomendaciones" owner="Persona 3" /></Shell></Protected>} />
-      <Route path="/notifications" element={<Protected><Shell><Placeholder title="Notificaciones" owner="Persona 3" /></Shell></Protected>} />
+      <Route path="/recommendations" element={<Protected><Shell><Recommendations /></Shell></Protected>} />
+      <Route path="/notifications" element={<Protected><Shell><Notifications /></Shell></Protected>} />
       <Route path="/claims" element={<Protected><Shell><Claims /></Shell></Protected>} />
       <Route path="/metrics" element={<Protected><Shell><Metrics /></Shell></Protected>} />
       <Route path="*" element={<Navigate to="/" replace />} />
