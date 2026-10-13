@@ -7,6 +7,8 @@ import Metrics from './pages/Metrics.jsx'
 import Placeholder from './pages/Placeholder.jsx'
 import Recommendations from './pages/Recommendations.jsx'
 import Notifications from './pages/Notifications.jsx'
+import Register from './pages/Register.jsx'
+
 
 function Protected({ children }) {
   return auth.token ? children : <Navigate to="/login" replace />
@@ -37,6 +39,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
       <Route path="/" element={<Navigate to="/claims" replace />} />
       <Route path="/feed" element={<Protected><Shell><Feed /></Shell></Protected>} />
       <Route path="/recommendations" element={<Protected><Shell><Recommendations /></Shell></Protected>} />

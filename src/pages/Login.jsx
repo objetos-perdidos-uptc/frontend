@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { auth, login } from '../api.js'
 
 export default function Login() {
@@ -28,6 +28,10 @@ export default function Login() {
         <input type="password" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} required />
         {error && <p className="error">{error}</p>}
         <button type="submit">Entrar</button>
+        <p style={{ textAlign: 'center', fontSize: '14px' }}>
+          ¿No tienes cuenta? <Link to="/register">Regístrate</Link>
+        </p>
+
       </form>
     </div>
   )

@@ -31,6 +31,10 @@ export async function api(path, { method = 'GET', body } = {}) {
 export const login = (email, password) =>
   api('/auth/login', { method: 'POST', body: { email, password } })
 
+export const register = (payload) =>
+  api('/auth/register', { method: 'POST', body: payload })
+
+
 // --- Reportes (report-service, Persona 2) ---
 const qs = (params) => {
   const s = new URLSearchParams(
